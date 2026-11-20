@@ -1,0 +1,12 @@
+cs50
+SQL
+flask
+Flask
+Flask-Session
+flash
+pytz
+requests
+datetime
+wraps
+werkzeug
+security

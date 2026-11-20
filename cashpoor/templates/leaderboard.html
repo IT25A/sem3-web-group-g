@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Leaderboard
+{% endblock %}
+
+{% block main %}
+    <h1>Leaderboard</h1>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-start">Username</th>
+                <th class="text-end">Rank</th>
+                <th class="text-end">Total Shares</th>
+                <th class="text-end">Total Value</th>
+                <th class="text-end">Total Depot</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td class="text-start">{{ user.username }}</td>
+                <td class="text-end">{{ user.rank }}</td>
+                <td class="text-end">{{ user.totalshares }}</td>
+                <td class="text-end">{{ "%.2f"|format(user.totalvalue) }}</td>
+                <td class="text-end">{{ "%.2f"|format(user.totaldepot) }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
