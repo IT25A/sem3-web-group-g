@@ -55,6 +55,7 @@ def update_rankings():
 
 # Below must be changed to own API and some more!
 
+
 def lookup(symbol):
     """Look up quote for symbol."""
     url = f"https://finance.cs50.io/quote?symbol={symbol.upper()}"
@@ -72,7 +73,7 @@ def lookup(symbol):
         return {
             "name": quote_data["companyName"],
             "price": price,
-            "symbol": symbol.upper()
+            "symbol": symbol.upper(),
         }
 
     except requests.RequestException as e:

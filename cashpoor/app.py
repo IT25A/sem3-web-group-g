@@ -241,7 +241,6 @@ def leaderboard():
     return render_template("leaderboard.html", users=users)
 
 
-
 @app.route("/buyshares", methods=["GET", "POST"])
 @login_required
 def buyshares():
@@ -283,7 +282,7 @@ def buyshares():
             FROM users
             WHERE id = ?
             """,
-            session["user_id"]
+            session["user_id"],
         )
 
         if not user:
@@ -333,7 +332,7 @@ def buyshares():
             shares,
             price,
             value,
-            value
+            value,
         )
 
         db.execute(
@@ -350,7 +349,7 @@ def buyshares():
             shares,
             new_totalvalue,
             new_totaldepot,
-            session["user_id"]
+            session["user_id"],
         )
 
         update_rankings()
@@ -358,7 +357,6 @@ def buyshares():
         return redirect("/index")
 
     return render_template("buyshares.html")
-
 
 
 @app.route("/sellshares", methods=["GET", "POST"])
@@ -401,7 +399,7 @@ def sellshares():
             FROM users
             WHERE id = ?
             """,
-            session["user_id"]
+            session["user_id"],
         )
 
         if not user:
@@ -419,7 +417,7 @@ def sellshares():
             AND symbol = ?
             """,
             session["user_id"],
-            symbol
+            symbol,
         )
 
         if not holding:
@@ -431,10 +429,7 @@ def sellshares():
         remaining_cost_basis = holding[0]["cost_basis"]
 
         if shares > shares_owned:
-            return apology(
-                f"You only own {shares_owned} shares of {symbol}!",
-                400
-            )
+            return apology(f"You only own {shares_owned} shares of {symbol}!", 400)
 
         average_cost = remaining_cost_basis / shares_owned
         sold_cost_basis = average_cost * shares
@@ -465,7 +460,7 @@ def sellshares():
                 new_cost_basis,
                 new_cost_basis,
                 stock_id,
-                session["user_id"]
+                session["user_id"],
             )
 
         else:
@@ -477,7 +472,7 @@ def sellshares():
                 AND user_id = ?
                 """,
                 stock_id,
-                session["user_id"]
+                session["user_id"],
             )
 
         new_cash = cash + value
@@ -503,7 +498,7 @@ def sellshares():
             new_totalshares,
             new_totalvalue,
             new_totaldepot,
-            session["user_id"]
+            session["user_id"],
         )
 
         update_rankings()
@@ -511,4 +506,3 @@ def sellshares():
         return redirect("/index")
 
     return render_template("sellshares.html")
-
